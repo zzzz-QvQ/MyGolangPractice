@@ -122,9 +122,103 @@ func main() {
 //print的不同类型及其作用
 */
 
-// 指针
-package main
+//2025.11.16 指针 运算符 系统输入 进制转换
+
+// 获取变量地址用& 指取指和引用；*是解引用 即获取指针类型所指向的值
+// 指针变量存的是一个地址 地址指向的空间才是值
+// 例如 var ptr *int = &i,ptr是一个int型指针变量 本身的值是&i
+// 值类型和指针数据类型要对应 值类型包括 int\float\bool\string\数组\结构体
+// 值类型以外，引用类型有 指针/slice/map/chan/interface
+// 值类型变量直接存储值，内存通常在栈中分配；引用类型变量存储地址，内存在堆上分配，若没有变量来引用这个地址，其空间就会被GC回收
+/*package main
+
+import (
+	"fmt"
+)
 
 func main() {
+	var num int = 1
+	var add *int = &num
+	fmt.Printf("num的地址为：%v\n", add)
+	num = *add + 1
+	fmt.Printf("num+1的值为：%d\n", num)
+	var ptr *int
+	ptr = &num
+	*ptr = 10
+	fmt.Printf("num的新值为：%d\n", num)
+	//运算符部分
+	//%取模运算公式 a%b=a-a/b*b
+	//自增或自减运算只能单独占一行再赋值 因此a=i++是错误的 可以用a+=1来描述自增 也不存在++a了
+	//关系运算符结果是true和false；逻辑运算符&&、||都具有短路的功能 以下为测试
+	var logi int = 10
+	if logi < 9 && logical() {
+		fmt.Println("ok")
+	}
+	if logi > 9 || logical() {
+		fmt.Println("ok")
+	}
+	//赋值运算符 <<=左移后赋值 &=按位与后赋值 ^=按位异或后赋值 |=按位或后复制
+	//如何不使用中间变量对两变量进行交换
+	var a, b int = 10, 20
+	//法①   法③ 按位异或
+	a, b = b, a
+	fmt.Println("a=", a, "b=", b)
+	//法②
+	a = a + b
+	b = a - b
+	a = a - b
+	fmt.Println("a=", a, "b=", b)
+	//go不支持三元运算符
+}
+func logical() bool {
+	fmt.Println("logical show")
+	return true
+}*/
+//下划线_是空标识符，可代表任意标识符，但其对应的值会被忽略，故仅能当占位符使用，不能作标识符
+//变量名、函数名、常量名首字母大写是公有的，类似于public，可以被其他包访问；若小写，则只可以在本包使用
+//导入包用go.mod init
 
+// 系统输入
+/*package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	//输入 fmt.scanf()/fmt.scanln() 前者是格式化输入 后者一个个输入
+	//scanln自动消耗换行符 故scanf后的第一个scanln不工作
+	var name string
+	var age byte
+	var score float32
+	var isPass bool
+	fmt.Println("请输入姓名")
+	fmt.Scanln(&name)
+	fmt.Println("请输入年龄")
+	fmt.Scanln(&age)
+	fmt.Println("请输入成绩")
+	fmt.Scanln(&score)
+	fmt.Println("请输入是否通过")
+	fmt.Scanln(&isPass)
+	fmt.Println("输入结果为：姓名：",name,"年龄：",age,"成绩：",score,"是否通过：",isPass);
+	//以上等同于
+	fmt.Scanf("%s,%d,%f,%t",&name,&age,&score,&isPass);
+	fmt.Println("输入结果为：姓名：",name,"年龄：",age,"成绩：",score,"是否通过：",isPass);
+}*/
+//进制转换与位运算
+//8进制以0开头 16进制以0x开头
+//2进制转8进制，从右边每3位转为10进制为8进制的一位；16进制就是每四位
+//计算机运算时都以补码方式运算 结果再恢复为原码
+//异或：相异为1 故结合以上两条，-2^2=-4
+
+//2025.11.17 流程控制
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println()
 }
