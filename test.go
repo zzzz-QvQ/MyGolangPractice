@@ -211,8 +211,122 @@ func main() {
 //计算机运算时都以补码方式运算 结果再恢复为原码
 //异或：相异为1 故结合以上两条，-2^2=-4
 
-//2025.11.17 流程控制
+//2025.11.17 流程控制 循环 跳出循环
 
+//分支
+/*package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println("请输入年龄：")
+	var age int
+	fmt.Scanln(&age)
+	if age > 18 { //if后条件不用括弧；就算只有一条语句，也要大括号
+		fmt.Println("已成年")
+	} else if age == 18 { //此处不能换行
+		fmt.Println("正好成年")
+	} else { //多分支中else不是必须的
+		fmt.Println("未成年")
+	}
+
+	//switch分支结构
+	//switch中每个case分支唯一，case关键字后可以加多个表达式；表达式必须和switch语句数据类型一致
+	// 匹配项后不用加break；最后有一个default
+	//switch穿透：fallthrough 若是在case后增加fallthrough 则会执行下一个case语句 默认穿透一层
+	var key int;
+	fmt.Println("请输入一个月份");
+	fmt.Scanln(&key);
+	switch key {
+	case 1,3,5,7,8,10,12://此处switch类型是int 那么case后的表达式结果也应该是int
+		fmt.Println("非腊月");
+	case 4,6,9,11:
+		fmt.Println("是腊月");
+		fallthrough;//相当于其他语言不加break 执行下一个case的结果句子；
+		// 例如此处输入4 输出：是腊月 是特殊腊月
+	case 2:
+		fmt.Println("是特殊腊月");
+	default:
+		fmt.Println("输入有误");
+	}
+}*/
+
+// 循环部分 go中无while和do-while的语法
+// for后不加括号
+/*package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println("请输入循环次数：")
+	var count int
+	fmt.Scanln(&count)
+	for i := 0; i < count; i++ {
+		fmt.Println("i love u")
+	}
+	//以上for中的内容也可以等价为 将初始化和迭代放在不同地方
+	var j int = 0
+	for j < count {
+		fmt.Println("i dont aggre")
+		j++
+	}
+	//第三种写法是for后直接跟{}，这是一个无限循环，需要配合break使用
+
+	//for-range遍历数组和字符串 下展示遍历字符串的两种方式
+	var str string = "hello world!大家"
+	for i := 0; i < len(str); i++ {
+		fmt.Printf("%c\n", str[i])
+	} //①老方法 将string看作数组，按照每个字节来遍历 所以不能正确识别中文
+	//以上问题要通过str转为[]rune切片来解决
+	str2 := []rune(str) //用新的切片类型的变量来接收
+	for i := 0; i < len(str2); i++ {
+		fmt.Printf("%c\n", str2[i])
+	}
+	//②用range将str拆分为index下标和val值 是按字符来遍历 所以不会出现以上中文乱码
+	for index, val := range str {
+		fmt.Printf("index=%d,val=%c\n", index, val)
+	}
+}*/
+
+// 多重循环控制 外层循环一次 内层循环全部
+/*// 三个班每班5人 统计每个班平均分和所有班级平均分
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var avrePerClass, averClass float32
+	var classNum, stuNum int = 3, 5
+	var totalSum float32 = 0
+	for i := 0; i < classNum; i++ {
+		fmt.Printf("请依次输入第%d班的%d个学生的成绩\n", i+1, stuNum)
+		var sum float32 = 0
+		for j := 0; j < stuNum; j++ {
+			fmt.Printf("第%d个学生的成绩是：\n", j+1)
+			var tempClassScore float32
+			fmt.Scanln(&tempClassScore)
+			sum += tempClassScore
+		}
+		avrePerClass = sum / float32(stuNum)
+		fmt.Println("该班平均成绩为：", avrePerClass)
+		totalSum += sum
+	}
+	averClass = totalSum / (float32(classNum) * float32(stuNum))
+	fmt.Println("全部平均成绩为：", averClass)
+}*/
+// 跳转控制语句 break、continue、goto
+//break出现在多层嵌套中时，可通过label标签来指明要终止的是哪一层语句块
+//continue也可通过label来指定
+//goto语句一般不使用 若使用 也是通过label
+// 随机数的生成 目前已摈弃seed 0-100的整数：rand.Intn(100)
+
+// 2025.11.18 函数
 package main
 
 import (
